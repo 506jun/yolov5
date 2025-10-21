@@ -24,7 +24,7 @@
 !cfg/yolov3*.cfg
 
 storage.googleapis.com
-runs/*
+#runs/*
 data/*
 data/images/*
 !data/*.yaml
@@ -48,14 +48,14 @@ VOC/
 !targets*.mat
 
 # Neural Network weights -----------------------------------------------------------------------------------------------
-*.weights
-*.pt
+#*.weights
+#*.pt
 *.pb
-*.onnx
-*.engine
+#*.onnx
+#*.engine
 *.mlmodel
 *.mlpackage
-*.torchscript
+#*.torchscript
 *.tflite
 *.h5
 *_saved_model/
