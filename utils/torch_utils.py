@@ -313,13 +313,18 @@ def model_info(model, verbose=False, imgsz=640):
 
     try:  # FLOPs
         p = next(model.parameters())
-        stride = max(int(model.stride.max()), 32) if hasattr(model, "stride") else 32  # max stride
+        stride = max(int(model.stride.max()), 32) if hasattr(model, 'stride') else 32  # max stride
         im = torch.empty((1, p.shape[1], stride, stride), device=p.device)  # input image in BCHW format
-        flops = thop.profile(deepcopy(model), inputs=(im,), verbose=False)[0] / 1e9 * 2  # stride GFLOPs
+        flops = thop.profile(deepcopy(model), inputs=(im, ), verbose=False)[0] / 1E9 * 2  # stride GFLOPs
         imgsz = imgsz if isinstance(imgsz, list) else [imgsz, imgsz]  # expand if int/float
-        fs = f", {flops * imgsz[0] / stride * imgsz[1] / stride:.1f} GFLOPs"  # 640x640 GFLOPs
-    except Exception:
-        fs = ""
+        fs = f', {flops * imgsz[0] / stride * imgsz[1] / stride:.1f} GFLOPs'  # 640x640 GFLOPs
+    except Exception as e:
+	# print(e)
+        im = torch.rand(1, 3, 640, 640).to(p.device)
+        flops, parms = thop.profile(model, inputs=(im,), verbose=False)
+    # print(f'Params: {parms}, GFLOPs: {flops * 2 / 1e9}')
+    # fs=''
+        fs = f', {flops * 2 / 1E9:.1f} GFLOPs'
 
     name = Path(model.yaml_file).stem.replace("yolov5", "YOLOv5") if hasattr(model, "yaml_file") else "Model"
     LOGGER.info(f"{name} summary: {len(list(model.modules()))} layers, {n_p} parameters, {n_g} gradients{fs}")

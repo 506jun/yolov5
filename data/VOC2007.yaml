@@ -1,0 +1,9 @@
+train: /home/ubuntu/yolov5/datasets/VOCtrainval_06-Nov-2007/VOCdevkit/VOC2007/train.txt
+val: /home/ubuntu/yolov5/datasets/VOCtrainval_06-Nov-2007/VOCdevkit/VOC2007/val.txt
+#test: D:/Dataset/VOC2007/test.txt
+ 
+# number of classes
+nc: 20
+ 
+# class names
+names: [ 'aeroplane', 'bicycle', 'bird', 'boat', 'bottle', 'bus', 'car', 'cat', 'chair', 'cow', 'diningtable', 'dog', 'horse', 'motorbike', 'person', 'pottedplant', 'sheep', 'sofa', 'train', 'tvmonitor' ]

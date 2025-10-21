@@ -12,6 +12,9 @@ from collections import OrderedDict, namedtuple
 from copy import copy
 from pathlib import Path
 from urllib.parse import urlparse
+from models.modules.ghostv2 import *
+from models.modules.CA import *
+from models.modules.simam import *
 
 import cv2
 import numpy as np
